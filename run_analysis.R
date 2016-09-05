@@ -3,9 +3,11 @@ require(dplyr)
 library(dplyr)
 
 ## Download and unzip the dataset:
+filename <- "getData.zip"
+
 if (!file.exists(filename)){
         fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-        download.file(fileURL, filename, method="curl")
+        download.file(fileURL, filename)
 }  
 if (!file.exists("UCI HAR Dataset")) { 
         unzip(filename) 
@@ -50,29 +52,29 @@ activityLabels$V2 <- sub("up", "Up", activityLabels$V2)
 #Read all the files in the directories, add variable names, and have only the rows we want
 testSubject <- read.table("UCI HAR Dataset/test/subject_test.txt")
 names(testSubject) <- "subject"
-testMain <-
+testData <-
         read.table("UCI HAR Dataset/test/X_test.txt")
-testMain <- 
-        testMain[, wantedRows$V1]
-names(testMain) <- wantedRows$V2
+testData <- 
+        testData[, wantedRows$V1]
+names(testData) <- wantedRows$V2
 testActivites <- read.table("UCI HAR Dataset/test/y_test.txt")
 names(testActivites) <- "activity"
 trainActivites <- read.table("UCI HAR Dataset/train/y_train.txt")
 names(trainActivites) <- "activity"
-trainMain <-
+trainData <-
         read.table("UCI HAR Dataset/train/X_train.txt")
-trainMain <-trainMain[, wantedRows$V1]
-names(trainMain) <- wantedRows$V2
+trainData <-trainData[, wantedRows$V1]
+names(trainData) <- wantedRows$V2
 trainSubject <-  read.table("UCI HAR Dataset/train/subject_train.txt")
 names(trainSubject) <- "subject"
 
 
 #concatenate train files and test files
 testComplete <-
-        cbind(testSubject, testActivites, testMain) %>%
+        cbind(testSubject, testActivites, testData) %>%
         tbl_df
 trainComplete <-
-        cbind(trainSubject, trainActivites, trainMain)  %>%
+        cbind(trainSubject, trainActivites, trainData)  %>%
         tbl_df
 
 #join the two to make a set, and make the activity column into text
@@ -80,13 +82,13 @@ completeSet <-
         full_join(testComplete, trainComplete)
 
         for (i in 1:6) {
-               completeSet$activityID <- gsub(i, activityLabels[i, 2], completeSet$activityID)
+               completeSet$activity <- gsub(i, activityLabels[i, 2], completeSet$activity)
         }
 
 #create the second, tidy set using dplyr
 tidyMeans <-
         completeSet %>%
-        group_by(subjectID, activityID) %>%
+        group_by(subject, activity) %>%
         summarize_each(funs(mean))
 
 write.table(completeSet, "./merged_data.txt")
