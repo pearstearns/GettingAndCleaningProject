@@ -92,5 +92,5 @@ tidyMeans <-
         summarize_each(funs(mean))
 
 #write results to text files
-write.table(completeSet, "./merged_data.txt")
-write.table(tidyMeans, "./merged_means.txt")
+write.table(completeSet, "./merged_data.txt", row.name=FALSE)
+write.table(tidyMeans, "./merged_means.txt", row.name=FALSE)
