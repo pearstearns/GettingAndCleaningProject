@@ -25,3 +25,4 @@ Good luck!
 #Steps to reproduce this project
 run code 'source("./run_analysis.R") in the interactive shell
 
+to read the the outputs into R, use read.table()
