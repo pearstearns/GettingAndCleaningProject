@@ -91,5 +91,6 @@ tidyMeans <-
         group_by(subject, activity) %>%
         summarize_each(funs(mean))
 
+#write results to text files
 write.table(completeSet, "./merged_data.txt")
 write.table(tidyMeans, "./merged_means.txt")
