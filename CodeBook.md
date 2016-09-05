@@ -64,4 +64,4 @@ vi. reads the rest of the files, adds variable names, and takes them down to onl
 vii. concatenates the files (Subject, Activities, and Data) into test and train data, and concatenates them again into the complete set, and loads them into dplyr
 viii. using a for loop, replaces the numeric values of activity with the text values
 ix. using dplyr, it groups by subject and then by activity, and through summarise_each() takes the mean of each column, creating the second tidy set
-x. writes both the complete set(merged_data.txt) and the second tidy set of means (merged_means.txt) into text files in the current directory.
+x. writes both the complete set(merged_data.txt) and the second tidy set of means (merged_means.txt) into text files in the current directory
