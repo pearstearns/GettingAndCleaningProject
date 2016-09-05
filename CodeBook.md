@@ -50,6 +50,10 @@ Note: features are normalized and bounded within [-1,1].
 
 The resulting variable names are of the following form: tbodyaccmeanx, which means the mean value of tBodyAcc-XYZ.
 
+Further:
+subject: Subjects involved (1:30)
+activity: all activities done by the subjects ("standing","sitting","laying","walking","walkingDownstairs","walkingUpstairs")
+
 ##Transformations
 i. Requires and loads the dplyr package
 ii. It then downloads and unzips the dataset from the given coursera link
