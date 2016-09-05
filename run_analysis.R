@@ -32,7 +32,7 @@ wantedRowsB <-
         tbl_df
 
 wantedRows <-
-        suppressWarnings(full_join(wantedRowsA, wantedRowsB)) %>%
+        suppressWarnings(full_join(wantedRowsA, wantedRowsB))
         
 wantedRows$V1 <-
         as.numeric(wantedRows$V1)
